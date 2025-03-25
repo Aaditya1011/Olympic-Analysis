@@ -8,8 +8,8 @@ import seaborn as sns
 import plotly.figure_factory as ff
 
 # import data.
-df = pd.read_csv('athlete_events.csv')
-region = pd.read_csv('noc_regions.csv')
+df = pd.read_csv('data/athlete_events.csv')
+region = pd.read_csv('data/noc_regions.csv')
 fun_fact = [
     "The first ancient Olympic Games were held in 776 BC in Olympia, Greece.",
     "The Olympic Games were initially a religious festival in honor of Zeus, the king of the Greek gods.",
@@ -120,6 +120,7 @@ if user_input == 'Overall Analysis':
     st.title('No. of Events Over Time.')
     fig,ax = plt.subplots(figsize=(35,35))
     x = df.drop_duplicates(['Year','Sport','Event'])
+    sns.set(font_scale=2)
     ax = sns.heatmap(x.pivot_table(index='Sport',columns='Year',values='Event',aggfunc='count').fillna(0).astype('int'),annot=True)
     st.pyplot(fig)
 
